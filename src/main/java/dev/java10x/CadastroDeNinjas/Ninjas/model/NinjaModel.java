@@ -1,9 +1,11 @@
-package dev.java10x.CadastroDeNinjas.model;
+package dev.java10x.CadastroDeNinjas.Ninjas.model;
 
-import dev.java10x.CadastroDeNinjas.model.enums.Clans;
-import dev.java10x.CadastroDeNinjas.model.enums.NinjaClass;
+import dev.java10x.CadastroDeNinjas.Missoes.model.MissaoModel;
+import dev.java10x.CadastroDeNinjas.Ninjas.model.enums.Clans;
+import dev.java10x.CadastroDeNinjas.Ninjas.model.enums.NinjaClass;
 import jakarta.persistence.*;
 
+import java.util.List;
 
 //Entity transforma uma classe em uma entidade do Banco de Dados
 @Entity
@@ -18,6 +20,11 @@ public class NinjaModel {
     private  Clans cla;
     private NinjaClass ninjaClass;
 
+    // @ManyToOne - Um ninja tem uma unica missao
+    @ManyToOne
+    @JoinColumn(name = "missions_id") // Chave estrangeira
+    private MissaoModel missions;
+
     public NinjaModel() {
     }
 
@@ -26,6 +33,10 @@ public class NinjaModel {
         this.age = age;
         this.cla = cla;
         this.ninjaClass = ninjaClass;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getName() {
@@ -59,4 +70,5 @@ public class NinjaModel {
     public void setNinjaClass(NinjaClass ninjaClass) {
         this.ninjaClass = ninjaClass;
     }
+
 }

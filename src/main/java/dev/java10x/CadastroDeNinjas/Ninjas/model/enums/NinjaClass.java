@@ -1,4 +1,4 @@
-package dev.java10x.CadastroDeNinjas.model.enums;
+package dev.java10x.CadastroDeNinjas.Ninjas.model.enums;
 
 public enum NinjaClass {
 
