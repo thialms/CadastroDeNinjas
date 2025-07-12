@@ -3,7 +3,7 @@ package dev.java10x.CadastroDeNinjas.Missoes.controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("missions")// mapear as APIS
+@RequestMapping("missions")// mapear as rotas
 public class MissoesController {
 
 
