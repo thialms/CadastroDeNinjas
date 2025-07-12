@@ -28,15 +28,15 @@ public class NinjaController {
     }
 
     //Mostrar todos os Ninjas (READ)
-    @GetMapping("/all")
-    public List<NinjaModel> seeAllNinjas(){
-        return ninjaService.seeAllNinjas();
+    @GetMapping("/list")
+    public List<NinjaModel> listNinjas(){
+        return ninjaService.listNinjas();
     }
 
     //Mostrar Ninja por ID (READ)
-    @GetMapping("/idsearch")
-    public String seeNinjaPerId(){
-        return "Mostrar Ninjas por ID";
+    @GetMapping("/list/{id}")
+    public NinjaModel listNinjaPerId(@PathVariable Long id){
+        return ninjaService.listNinjaPerId(id);
     }
 
     //Alterar dados dos Ninjas (UPDATE)
