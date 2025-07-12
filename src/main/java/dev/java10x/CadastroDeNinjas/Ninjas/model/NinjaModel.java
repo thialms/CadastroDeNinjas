@@ -1,14 +1,12 @@
 package dev.java10x.CadastroDeNinjas.Ninjas.model;
 
-import dev.java10x.CadastroDeNinjas.Missoes.model.MissaoModel;
+import dev.java10x.CadastroDeNinjas.Missoes.model.MissoesModel;
 import dev.java10x.CadastroDeNinjas.Ninjas.model.enums.Clans;
 import dev.java10x.CadastroDeNinjas.Ninjas.model.enums.NinjaClass;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 //Entity transforma uma classe em uma entidade do Banco de Dados
 @Entity
@@ -29,6 +27,6 @@ public class NinjaModel {
     // @ManyToOne - Um ninja tem uma unica missao
     @ManyToOne
     @JoinColumn(name = "missions_id") // Chave estrangeira
-    private MissaoModel missions;
+    private MissoesModel missions;
 
 }
