@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.bind.annotation.CookieValue;
 
 //Entity transforma uma classe em uma entidade do Banco de Dados
 @Entity
@@ -18,13 +19,14 @@ public class NinjaModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
     private String name;
     @Column(unique = true)
     private String email;
     private  int age;
     private  Clans cla;
     private NinjaClass ninjaClass;
+    private double jinchuuriki;
 
     // @ManyToOne - Um ninja tem uma unica missao
     @ManyToOne
