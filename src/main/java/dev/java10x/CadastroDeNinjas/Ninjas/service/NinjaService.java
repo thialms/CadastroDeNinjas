@@ -32,4 +32,15 @@ public class NinjaService {
         return ninjaPerId.orElse(null);
     }
 
+    //Atualizar Ninja
+    public NinjaModel updateNinjaPerID(Long id){
+        Optional<NinjaModel> ninjaPerId = ninjaRepository.findById(id);
+
+    }
+
+    //Remover Ninja - tem que ser void
+    public void deleteNinjaPerId(Long id){
+        ninjaRepository.deleteById(id);
+    }
+
 }
