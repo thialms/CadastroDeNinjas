@@ -1,12 +1,13 @@
 package dev.java10x.CadastroDeNinjas.Missoes;
 
-import dev.java10x.CadastroDeNinjas.Ninjas.NinjaDTO;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("missions")// mapear as rotas
+@RequestMapping("missions") // mapear as rotas
 public class MissoesController {
 
     private MissoesService missoesService;
@@ -15,34 +16,58 @@ public class MissoesController {
         this.missoesService = missoesService;
     }
 
-    // Adicionar Missao (CREATE)
+    // Adicionar Missão (CREATE)
     @PostMapping("/create")
-    public MissoesDTO createMission(@RequestBody MissoesDTO missoesDTO){
-        return missoesService.createMission(missoesDTO);
+    public ResponseEntity<String> createMission(@RequestBody MissoesDTO missoesDTO) {
+        MissoesDTO createdMission = missoesService.createMission(missoesDTO);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body("Missão criada com sucesso: " + createdMission.getName() + ", ID: " + createdMission.getId());
     }
 
-    //Mostrar todas as Missoes (READ)
+
+    // Mostrar todas as Missões (READ)
     @GetMapping("/list")
-    public List<MissoesDTO> listMissions(){
-        return missoesService.listMissions();
+    public ResponseEntity<List<MissoesDTO>> listMissions() {
+        List<MissoesDTO> missions = missoesService.listMissions();
+        return ResponseEntity.ok(missions);
     }
 
-    //Mostrar Missao por ID (READ)
+    //  Mostrar Missão por ID (READ)
     @GetMapping("/list/{id}")
-    public MissoesDTO listMissionPerId(@PathVariable Long id){
-        return missoesService.listMissionPerId(id);
+    public ResponseEntity<?> listMissionPerId(@PathVariable Long id) {
+        MissoesDTO mission = missoesService.listMissionPerId(id);
+
+        if (mission != null) {
+            return ResponseEntity.ok(mission);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Missão com o ID: " + id + " não encontrada.");
+        }
     }
 
-    //Alterar dados das Missoes (UPDATE)
+    //  Alterar dados das Missões (UPDATE)
     @PutMapping("/update/{id}")
-    public MissoesDTO missionUpdated(@PathVariable Long id, @RequestBody MissoesDTO missoesDTO){
-        return missoesService.updateMission(id, missoesDTO);
+    public ResponseEntity<?> updateMission(@PathVariable Long id, @RequestBody MissoesDTO missoesDTO) {
+        MissoesDTO updatedMission = missoesService.updateMission(id, missoesDTO);
+
+        if (updatedMission != null) {
+            return ResponseEntity.ok(updatedMission);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Missão com o ID: " + id + " não encontrada.");
+        }
     }
 
-    //Deletar Missao (DELETE)
+    //  Deletar Missão (DELETE)
     @DeleteMapping("/delete/{id}")
-    public void deleteMissionPerID(@PathVariable Long id){
-        missoesService.deleteMissionPerId(id);
+    public ResponseEntity<String> deleteMissionPerID(@PathVariable Long id) {
+        // First, check if the mission exists before attempting to delete
+        if (missoesService.listMissionPerId(id) != null) {
+            missoesService.deleteMissionPerId(id);
+            return ResponseEntity.ok("Missão com o ID: " + id + " deletada com sucesso.");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Missão com o ID: " + id + " não encontrada.");
+        }
     }
 }
-
