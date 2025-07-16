@@ -1,8 +1,5 @@
-package dev.java10x.CadastroDeNinjas.Ninjas.controller;
+package dev.java10x.CadastroDeNinjas.Ninjas;
 
-import dev.java10x.CadastroDeNinjas.Ninjas.dto.NinjaDTO;
-import dev.java10x.CadastroDeNinjas.Ninjas.model.NinjaModel;
-import dev.java10x.CadastroDeNinjas.Ninjas.service.NinjaService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,11 +12,6 @@ public class NinjaController {
 
     public NinjaController(NinjaService ninjaService) {
         this.ninjaService = ninjaService;
-    }
-
-    @GetMapping("/boasvindas")
-    public String boasVindas(){
-        return "This is my first message in this route";
     }
 
     // Adicionar Ninja (CREATE)

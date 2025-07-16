@@ -1,13 +1,12 @@
-package dev.java10x.CadastroDeNinjas.Ninjas.model;
+package dev.java10x.CadastroDeNinjas.Ninjas;
 
-import dev.java10x.CadastroDeNinjas.Missoes.model.MissoesModel;
+import dev.java10x.CadastroDeNinjas.Missoes.MissoesModel;
 import dev.java10x.CadastroDeNinjas.Ninjas.model.enums.Clans;
 import dev.java10x.CadastroDeNinjas.Ninjas.model.enums.NinjaClass;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.web.bind.annotation.CookieValue;
 
 //Entity transforma uma classe em uma entidade do Banco de Dados
 @Entity
@@ -23,10 +22,10 @@ public class NinjaModel {
     private String name;
     @Column(unique = true)
     private String email;
-    private  int age;
+    private int age;
     private  Clans cla;
     private NinjaClass ninjaClass;
-    private double jinchuuriki;
+    private Double jinchuuriki;
 
     // @ManyToOne - Um ninja tem uma unica missao
     @ManyToOne
